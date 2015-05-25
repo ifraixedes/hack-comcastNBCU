@@ -7,7 +7,6 @@ let qs = require('qs');
 
 // Events
 const aStreamRespOK = 'response:ok';
-const aStreamRespError = 'response:error';
 const vStreamGet = 'request:stream';
 
 function init(artery, vein) {
@@ -25,7 +24,7 @@ function init(artery, vein) {
     }
   };
 
-  vein.on(`api:string-wire:${vStreamGet}`, getStreams);
+  artery.on(`api:string-wire:${vStreamGet}`, getStreams);
 
   return stringWire;
 
@@ -35,17 +34,12 @@ function init(artery, vein) {
     }
 
     http({
-      url: '/api/stringwire?' + qs.stringify(params),
+      url: '/api/stringwire?' + qs.stringify(params)
     }).then(function (resp) {
-        if (resp.StatusCode >= 200) {
-          currentResult = JSON.parse(resp.content);
-          artery.emit(`api:string-wire:${aStreamRespOK}`, stringWire);
-        } else {
-          errorResult = resp;
-          artery.emit(`api:string-wire:${aStreamRespError}`, stringWire);
-        }
+          currentResult = resp;
+          vein.emit(`api:string-wire:${aStreamRespOK}`, stringWire);
     }).catch(function (err) {
-      artery.emit('error', err);
+      vein.emit('error', err);
     });
   }
 }

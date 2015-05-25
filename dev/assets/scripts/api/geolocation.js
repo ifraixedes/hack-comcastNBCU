@@ -5,7 +5,7 @@ module.exports = init;
 // Events
 const eventUpdate = 'update';
 
-function init(artery) {
+function init(artery, vein) {
   /*eslint-disable no-unused-vars */
   let watchID = null;
   /*eslint-enable no-unused-vars */
@@ -20,7 +20,7 @@ function init(artery) {
 
   if (!navigator.geolocation) {
     /*eslint-disable quotes */
-    artery.emit('fatal', new Error("Browser doesn't support geolocation, this App cannot work"));
+    vein.emit('fatal', new Error("Browser doesn't support geolocation, this App cannot work"));
     /*eslint-enable quotes */
   }
 
@@ -44,10 +44,10 @@ function init(artery) {
       lat: pos.coords.latitude,
       lon: pos.coords.longitude
     };
-    artery.emit(`api:geolocation:${eventUpdate}`, geolocation);
+    vein.emit(`api:geolocation:${eventUpdate}`, geolocation);
   }
 
   function errorPosition() {
-    artery.emit('error', new Error('Sorry no position available, try again or move around to get signal'));
+    vein.emit('error', new Error('Sorry no position available, try again or move around to get signal'));
   }
 }
