@@ -1,9 +1,28 @@
 extends layout
 
 block content
-  h1 Watch what people are streming around
-  div
-    input(name="radiusPicker", type="range", min="1", max="20", step="0.5", value="10")
-    span(name="radiusValue")= 10
+  h2 Watch What People've Been Streaming Around
+  div(class="row")
+    div(class="col s12")
+      input(name="radiusPicker", type="range", min="1", max="500", step="0.5", value="10" style="width: 100%")
+  div(class="row")
+    div(class="col s12")
+      span(name="radiusValue")= 10
+      span &nbsp; km
+  div(class="row")
+    div(class="col s3")
+      span videos about:
+    div(class="col s6" style="text-align: center")
+      input(name="keywords", type="text" style="width: 100%", placeholder="Skate Boarding, BMX")
+  div(class="row")
+    div(class="col s3 offset-s3" style="text-align: center")
+      input(name="realtime", type="radio")
+      span(style="margin-left: 1em;") Streaming
+    div(class="col s3" style="text-align: center")
+      input(name="realtime", type="radio", checked)
+      span(style="margin-left: 1em;") Archived
+    div(class="col s3")
 
-  ul(class="list")
+  div(class="row")
+    div(class="col s8 offset-s2")
+      ul(class="streams-list" style="list-style: none; width: 100%; margin: auto; padding: 0;")

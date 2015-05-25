@@ -30,7 +30,7 @@ function init(artery, vein) {
   function startWatch() {
     watchID = navigator.geolocation.watchPosition(getPosition, errorPosition, {
         timeout: 60000, // 1 minute
-        maximumAge: 120000 // 2 minutes
+        maximumAge: 0
     });
   }
 
@@ -40,6 +40,7 @@ function init(artery, vein) {
   }
 
   function getPosition(pos) {
+    console.log(`updating position ${pos.coords.latitude}, ${pos.coords.longitude}`);
     currentLocation = {
       lat: pos.coords.latitude,
       lon: pos.coords.longitude

@@ -12,18 +12,22 @@ function init(artery, vein) {
     get: getCurrentValue
   };
 
+  pickerElem.addEventListener('change', pickerElemOnChange);
   pickerElem.addEventListener('input', pickerElemOnInput);
 
   vein.emit(`ui:radius:${eventInit}`, radius);
   return radius;
 
   // Functions definitions
-  function pickerElemOnInput(event) {
-    showValueElem.innerHTML = event.target.value;
+  function pickerElemOnChange(event) {
     vein.emit(`ui:radius:${eventUpdate}`, radius);
   }
 
+  function pickerElemOnInput(event) {
+    showValueElem.innerHTML = event.target.value;
+  }
+
   function getCurrentValue() {
-    return parseFloat(pickerElem.getAttribute('value'));
+    return parseFloat(pickerElem.value);
   }
 }

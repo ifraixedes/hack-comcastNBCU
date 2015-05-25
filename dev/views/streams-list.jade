@@ -1,0 +1,10 @@
+if streams.length >= 0
+  each stream in streams
+    li
+      if stream.archiveUrl != null
+        video(width="100%", autoplay)
+          source(src=stream.archiveUrl, type="video/mp4")
+          your browser doesn't support video
+        //img(src=stream.thumbnailUrl)
+else
+  li No videos are streamed around

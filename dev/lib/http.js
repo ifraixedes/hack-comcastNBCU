@@ -3,7 +3,7 @@
 var HTTP = require('http');
 var HTTPS = require('https');
 var url = require('url');
-var debug = require('debug')('http-client');
+var debug = require('debug')('http');
 var qs = require('qs');
 
 module.exports = {
@@ -48,6 +48,7 @@ function makeRequest(reqURL, data) {
     }
   }
 
+  debug(JSON.stringify(reqObj));
   return sendingRequest(reqObj);
 }
 
