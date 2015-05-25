@@ -6,7 +6,6 @@ const winston = require('winston');
 
 function getConfig() {
   let env = getEnvVariables();
-  //let isProduction = env.node === 'production';
 
   let config = {
     env: env.node,
